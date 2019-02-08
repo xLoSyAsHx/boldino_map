@@ -12,3 +12,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Map {
+  position: relative;
+}
+
+
+
+svg {
+  position: absolute;
+}
+
+
+.wrapper {
+  display: inline-block;
+  height: 6436px;
+  width: 4580px;
+  padding: 5px;
+  margin: 5px;
+  background: lightgray;
+}
+
+.wrapper img {
+  height: 400%;
+  width: 400%;
+  object-fit: contain;
+}
+
+/*
+img {
+  width:4580px;
+  height:6436px;
+  overflow-x: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+*/
