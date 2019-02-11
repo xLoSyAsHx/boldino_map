@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "prop-types": "^15.7.1",
     "react": "^16.8.1",
     "react-container-dimensions": "^1.4.1",
     "react-dom": "^16.8.1",
