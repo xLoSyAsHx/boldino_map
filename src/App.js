@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import TestElem from "../src/TestElem";
+
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import boldinoMap from "../src/map.svg"
@@ -65,6 +68,20 @@ class App extends Component {
 }
 */
 export default class CreateContact extends Component {
+
+  constructor() {
+      super();
+
+      this.SVGClickablesData = [
+          {
+              d: "m 0,0 0,1000 500,0 0,-1000 z"
+          },
+          {
+              d: "m 700,0 0,1000 700,0 0,-1000 z"
+          }
+      ];
+  }
+
   state = {
     windowHeight: undefined,
     windowWidth: undefined
@@ -84,6 +101,27 @@ export default class CreateContact extends Component {
     window.removeEventListener('resize', this.handleResize)
   }
 
+  menuClick(id) {
+      console.log("Click id == " + id);
+  }
+
+  GetSVGClickable() {
+      let clickables = [];
+
+      for (let i = 0; i < this.SVGClickablesData.length; ++i) {
+          clickables.push(
+            <TestElem key={i} data={
+              {
+                  id: i,
+                  d: this.SVGClickablesData[i].d,
+              }
+            }></TestElem>
+          );
+      }
+
+      return clickables;
+  }
+
   render() {
     return (
       <div className="wrapper" >
@@ -92,17 +130,12 @@ export default class CreateContact extends Component {
             <Draggable 
               //defaultPosition={{x: -2290, y: -3218}}
               //grid={[5, 5]}
-              bounds={{top: -6436, left: -4580 + this.state.windowWidth, right:  0, bottom: 0}}
+              bounds={{top: -6436 + this.state.windowHeight, left: -4580 + this.state.windowWidth, right:  0, bottom: 0}}
                //viewBox="0 0 4580 6436"
               scale={1}>
-              <div >
-                
-                <svg width={4580} height={6436} >
-                <a href="#">
-                  <path className="boldino" d="m 0,0 0,1000 500,0 0,-1000 z">
-                  </path>
-                </a>
-                  
+              <div>
+                <svg className="boldinoSVG" width={4580} height={6436} >
+                  {this.GetSVGClickable()}
                 </svg>
                 <img width={4580} height={6436} src={boldinoImg} alt="image"/>
               </div>
