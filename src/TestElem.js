@@ -30,6 +30,7 @@ export default class TestElem extends Component {
   render() {
     return (
         <a href="#" onClick={() => this.menuClick(this.elEd)}>
+            <rect width={300} height={100}  />
             <path className="boldinoElement" d={this.d} fill="#bf2552">
             </path>
         </a>
