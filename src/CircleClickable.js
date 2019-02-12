@@ -5,11 +5,12 @@ export default class CircleClickable extends Component {
     constructor(props) {
         super(props);
 
-        this.elEd = props.data.id;
+        this.elId = props.data.id;
         this.cx = props.data.cx;
         this.cy = props.data.cy;
         this.rx = props.data.rx;
         this.ry = props.data.ry;
+        this.callback = props.data.callback;
 
         console.log(props.data);
     }
@@ -17,11 +18,12 @@ export default class CircleClickable extends Component {
 
   onClick(id) {
       console.log("ReckClickable id == " + id);
+      this.callback.SetDescription(this.elId)
   }
 
   render() {
     return (
-        <a href="#" onClick={() => this.onClick(this.elEd)}>
+        <a href="#" onClick={() => this.onClick(this.elId)}>
             <ellipse className="boldinoElement" id={this.id} cx={this.cx} cy={this.cy} rx={this.rx} ry={this.ry} fill="#bf2552" />
         </a>
     );

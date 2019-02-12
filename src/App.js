@@ -36,6 +36,13 @@ export default class CreateContact extends Component {
   constructor() {
       super();
 
+      this.descriptionArray = [
+        "This is an object number 1",
+        "This is an object number 2",
+        "This is an object number 3",
+      ];
+      this.currentDescription = "Empty";
+
       this.GetSVGClickable();
   }
 
@@ -96,6 +103,7 @@ export default class CreateContact extends Component {
                   cy: this.SVGClickablesData[i].cy,
                   rx: this.SVGClickablesData[i].rx,
                   ry: this.SVGClickablesData[i].ry,
+                  callback: this,
               }
             }></CircleClickable>
           );
@@ -104,9 +112,26 @@ export default class CreateContact extends Component {
       return clickables;
   }
 
+  SetDescription(id) {
+      console.log("SetDescription" + id);
+      this.currentDescription = this.descriptionArray[id - 1];
+      this.forceUpdate()
+  }
+
+  GetDescription() {
+      return this.descriptionArray;
+  }
+
+  GetDescriptionForRender() {
+      return (
+        <div className="DetailedInfoWindow"> {this.currentDescription}</div>
+      );
+  }
+
   render() {
     return (
       <div className="wrapper" >
+      {this.GetDescriptionForRender()}
         <CssBaseline />
             <Draggable 
               bounds={{top: -6436 + this.state.windowHeight, left: -4580 + this.state.windowWidth, right:  0, bottom: 0}}
@@ -118,6 +143,7 @@ export default class CreateContact extends Component {
                 <img width={4580} height={6436} src={boldinoImg} alt="image"/>
               </div>
             </Draggable>
+            
       </div>
     );
   }
