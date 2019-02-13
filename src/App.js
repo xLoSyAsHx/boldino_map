@@ -7,7 +7,14 @@ import ParseSVG from 'svg-path-parser';
 import CircleClickable from "../src/CircleClickable";
 import boldinoImg from "../src/map.jpg"
 import boldinoSvg from "../src/map3.svg"
+import infoImg from "../src/InfoImg.jpg"
+import sightImg1 from "../src/sight1.jpg"
+import sightImg2 from "../src/sight2.jpg"
+import sightImg3 from "../src/sight3.jpg"
 import './App.css';
+import Paper from "@material-ui/core/es/Paper/Paper";
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 
@@ -36,12 +43,31 @@ export default class CreateContact extends Component {
   constructor() {
       super();
 
-      this.descriptionArray = [
-        "This is an object number 1",
-        "This is an object number 2",
-        "This is an object number 3",
+      this.titleArray = [
+        "State Museum of A.S. Pushkin",
+        "Monument to A. Pushkin",
+        "The Oak",
       ];
-      this.currentDescription = "Empty";
+
+      this.descriptionArray = [
+        "Description of State Museum of A.S. Pushkin",
+        "Description of Monument to A. Pushkin",
+        "Description of The Oak",
+      ];
+
+      console.log("Image path" + infoImg);
+
+      this.imageArray = [
+          sightImg1,
+          sightImg2,
+          sightImg3,
+      ];
+
+      this.currentTitle = "Click on the sight to know more";
+
+      this.currentDescription = "";
+
+      this.currentImg = infoImg;
 
       this.GetSVGClickable();
   }
@@ -112,14 +138,33 @@ export default class CreateContact extends Component {
       return clickables;
   }
 
+  SetTitle(id) {
+      console.log("SetTitle" + id);
+      this.currentTitle = this.titleArray[id - 1];
+      this.forceUpdate()
+  }
+
   SetDescription(id) {
       console.log("SetDescription" + id);
       this.currentDescription = this.descriptionArray[id - 1];
       this.forceUpdate()
   }
 
+  SetInfoImage(id) {
+      console.log("SetInfoImage" + id);
+      this.currentImg = this.imageArray[id - 1];
+      this.forceUpdate()
+  }
+  GetTitle() {
+      return this.titleArray;
+  }
+
   GetDescription() {
       return this.descriptionArray;
+  }
+
+  GetDescription() {
+      return this.imageArray;
   }
 
   GetDescriptionForRender() {
@@ -131,18 +176,40 @@ export default class CreateContact extends Component {
   render() {
     return (
       <div className="wrapper" >
-      {this.GetDescriptionForRender()}
         <CssBaseline />
-            <Draggable 
-              bounds={{top: -6436 + this.state.windowHeight, left: -4580 + this.state.windowWidth, right:  0, bottom: 0}}
-              scale={1}>
-              <div>
-                <svg className="boldinoSVG" width={4580} height={6436} >
-                  {this.GetSVGClickableForRender()}
-                </svg>
-                <img width={4580} height={6436} src={boldinoImg} alt="image"/>
-              </div>
-            </Draggable>
+          <Grid container>
+              <Grid item>
+                  <Paper className="DetailedInfoWindow">
+                      <Grid container spacing={16}>
+                          <Grid item className="imgWrap">
+                              <img className="sightImg" alt="Image" src={this.currentImg} />
+                          </Grid>
+
+                          <Grid item>
+                              <Typography gutterBottom variant="title">
+                                  {this.currentTitle}
+                              </Typography>
+
+                              <Typography gutterBottom>
+                                  {this.currentDescription}
+                              </Typography>
+                          </Grid>
+                      </Grid>
+                  </Paper>
+              </Grid>
+              <Grid item>
+                  <Draggable
+                      bounds={{top: -6436 + this.state.windowHeight, left: -4580 + this.state.windowWidth, right:  0, bottom: 0}}
+                      scale={1}>
+                      <div>
+                          <svg className="boldinoSVG" width={4580} height={6436} >
+                              {this.GetSVGClickableForRender()}
+                          </svg>
+                          <img width={4580} height={6436} src={boldinoImg} alt="image"/>
+                      </div>
+                  </Draggable>
+              </Grid>
+          </Grid>
             
       </div>
     );

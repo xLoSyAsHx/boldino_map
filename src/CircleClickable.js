@@ -18,6 +18,8 @@ export default class CircleClickable extends Component {
 
   onClick(id) {
       console.log("ReckClickable id == " + id);
+      this.callback.SetInfoImage(this.elId)
+      this.callback.SetTitle(this.elId)
       this.callback.SetDescription(this.elId)
   }
 
